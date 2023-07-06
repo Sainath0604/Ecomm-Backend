@@ -32,7 +32,9 @@ app.listen(5000, () => {
 //MongoDB connection
 
 const mongoose = require("mongoose");
-const mongoUrl = process.env.DATABASE_URL;
+const mongoUrl = isProduction
+  ? process.env.DATABASE_URL
+  : "mongodb://0.0.0.0:27017/";
 
 mongoose
   .connect(mongoUrl, {
@@ -116,7 +118,11 @@ app.post("/forgotPassword", async (req, res) => {
     });
     //^^created token with email, id and above secret which expires in 5min
 
-    const link = `http://localhost:5000/resetPassword/${oldUser._id}/${token}`;
+    const resetPassUrl = isProduction
+      ? process.env.BACKEND_URL
+      : "http://localhost:5000";
+
+    const link = `${resetPassUrl}/resetPassword/${oldUser._id}/${token}`;
     console.log(link);
 
     const transporter = nodemailer.createTransport({
