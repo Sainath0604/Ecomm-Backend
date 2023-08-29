@@ -46,7 +46,7 @@ mongoose
   .catch((e) => console.log(e));
 
 //Importing User schema
-require("./models/Schema.js");
+require("./models/userModel");
 const User = mongoose.model("userInfo");
 
 //Register API
@@ -281,6 +281,7 @@ app.post("/editUser", async (req, res) => {
 
 //Importing Product schema
 
+require("./models/productModel");
 const Product = mongoose.model("product");
 
 //Upload Product information API
