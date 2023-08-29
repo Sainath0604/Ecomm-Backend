@@ -389,3 +389,4 @@ app.post("/editProductInfo", upload.single("product"), async (req, res) => {
       .send({ status: "error", message: "Failed to update Product Info" });
   }
 });
+
